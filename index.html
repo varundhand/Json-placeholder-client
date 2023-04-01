@@ -13,7 +13,7 @@
 
     <div class="resources">
       <label for="">Resource:</label>
-      <select name="resource" class="resource">
+      <select name="resource" class="resource" onchange="resourceClick(event)"> <!--resource-->
         <option value="users">users</option>
         <option value="posts">posts</option>
         <option value="albums">albums</option>
@@ -25,17 +25,17 @@
 
     <div class="resources">
       <label for="">ID:</label>
-      <input type="number" name="" id="">
+      <input type="number" name="" id="id">
     </div>
 
     <div class="resources">
       <label for="">Page:</label>
-      <input type="number" name="" id="">
+      <input type="number" name="" id="page">
     </div>
 
     <div class="resources">
       <label for="">Sort:</label>
-      <select name="resource" class="resource">
+      <select name="resource" class="sort" onchange="sortClick(event)"> <!--sort-->
         <option value="asc">asc</option>
         <option value="desc">desc</option>
       </select>
@@ -53,7 +53,7 @@
     <div class="box2 p-5 border-start">
       <div class="form-floating ">
         <textarea class="form-control p-0" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 404px; width: 404px;"></textarea>
-        <label for="floatingTextarea2">Comments</label>
+        <label for="floatingTextarea2">Response</label>
       </div>
     </div>
   </div>
