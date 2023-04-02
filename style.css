@@ -1,12 +1,11 @@
 body{
   margin: 0;
   padding: 0;
-  background-color: rgb(255, 247, 238);
+  background-color: rgb(218, 201, 255)
 }
 
 .query-params{
   display: flex;
-  padding-top: 100px;
   justify-content: center;
 }
 
@@ -22,6 +21,6 @@ body{
 }
 
 .box-1{
-  width: 500px;
-  height: 500px;
+  width: 650px;
+  height: 600px;
 }

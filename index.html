@@ -1,62 +1,81 @@
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="query-params">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="query-params bg-body p-5">
+      <div class="resources fw-bold">
+        <label for="">Resource:</label>
+        <select
+          name="resource"
+          class="resource form-select"
+          onchange="resourceClick(event)"
+        >
+          <!--resource-->
+          <option value="users">users</option>
+          <option value="posts">posts</option>
+          <option value="albums">albums</option>
+          <option value="photos">photos</option>
+          <option value="todos">todos</option>
+          <option value="comments">comments</option>
+        </select>
+      </div>
 
-    <div class="resources">
-      <label for="">Resource:</label>
-      <select name="resource" class="resource" onchange="resourceClick(event)"> <!--resource-->
-        <option value="users">users</option>
-        <option value="posts">posts</option>
-        <option value="albums">albums</option>
-        <option value="photos">photos</option>
-        <option value="todos">todos</option>
-        <option value="comments">comments</option>
-      </select>
-    </div>
+      <div class="resources fw-bold">
+        <label for="">ID:</label>
+        <input type="number" name="" id="id" min="1" max="10" class="form-control"/>
+      </div>
 
-    <div class="resources">
-      <label for="">ID:</label>
-      <input type="number" name="" id="id" min="1" max="10">
-    </div>
+      <div class="resources fw-bold">
+        <label for="">Page:</label>
+        <input type="number" name="" id="page" min="1" class="form-control"/>
+      </div>
 
-    <div class="resources">
-      <label for="">Page:</label>
-      <input type="number" name="" id="page" min="1">
-    </div>
+      <div class="resources fw-bold">
+        <label for="">Sort:</label>
+        <select name="resource " class="sort form-select" onchange="sortClick(event)">
+          <!--sort-->
+          <option value="asc">asc</option>
+          <option value="desc">desc</option>
+        </select>
+      </div>
 
-    <div class="resources">
-      <label for="">Sort:</label>
-      <select name="resource" class="sort" onchange="sortClick(event)"> <!--sort-->
-        <option value="asc">asc</option>
-        <option value="desc">desc</option>
-      </select>
-    </div>
-
-    <div class="resources">
-      <button type="button" class="btn btn-danger">GO</button>
-    </div>
-  </div>
-
-  <div class="response d-flex justify-content-center pt-5">
-    <div class="box-1 p-5 border-end">
-      
-    </div>
-    <div class="box2 p-5 border-start">
-      <div class="form-floating ">
-        <textarea class="form-control p-0" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 404px; width: 404px;">hello ji</textarea>
-        <label for="floatingTextarea2">Response</label>
+      <div class="resources">
+        <button type="button" class="btn btn-dark">GO</button>
       </div>
     </div>
-  </div>
-  <script src="script.js"></script>
-</body>
+
+    <div class="response d-flex justify-content-center pt-5">
+      <div class="box-1 p-5 border-end">
+        <!--empty box-->
+      </div>
+      <div class="box2 p-5 border-start">
+        <div class="form">
+          <textarea
+            readonly
+            class="form-control p-0 response-box text-secondary"
+            name="response"
+            style="height: 600px; width: 650px"
+          ></textarea>
+          <!-- <label for="floatingTextarea2">Response</label> -->
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
