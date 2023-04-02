@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="query-params bg-body p-5">
+    <form class="query-params bg-body p-5">
       <div class="resources fw-bold">
         <label for="">Resource:</label>
         <select
@@ -43,7 +43,7 @@
 
       <div class="resources fw-bold">
         <label for="">Page:</label>
-        <input type="number" name="" id="page" min="1" class="form-control"/>
+        <input type="number" name="" id="page" min="1" class="form-control" onkeydown="onPageChange(event)" />
       </div>
 
       <div class="resources fw-bold">
@@ -56,21 +56,21 @@
       </div>
 
       <div class="resources">
-        <button type="button" class="btn btn-dark">GO</button>
+        <button type="submit" class="btn btn-dark">GO</button>
       </div>
-    </div>
+    </form>
 
     <div class="response d-flex justify-content-center pt-5">
-      <div class="box-1 p-5 border-end">
+      <div class="box-1 p-5 border-end w-100">
         <!--empty box-->
       </div>
-      <div class="box2 p-5 border-start">
+      <div class="box2 p-5 border-start w-100">
         <div class="form">
           <textarea
             readonly
             class="form-control p-0 response-box text-secondary"
             name="response"
-            style="height: 600px; width: 650px"
+            style="height: 600px; width: 100%;"
           ></textarea>
           <!-- <label for="floatingTextarea2">Response</label> -->
         </div>

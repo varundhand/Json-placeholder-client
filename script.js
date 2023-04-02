@@ -60,3 +60,23 @@ function showResponse(object) {
   console.log(responseElement);
   responseElement.value = object;
 }
+
+// Validation for page number keyboard input
+// TODO: Come back to this & find a better solution
+function onPageChange(e) {
+  let oldPage = document.querySelector("#page").value;
+  const pageEntered = e.key;
+
+  if (e.key === "Backspace") {
+    oldPage = oldPage.substring(0, oldPage.length - 1);
+  }
+
+  const newPage = parseInt(oldPage + pageEntered);
+  const validPages = Array.from(Array(100).keys());
+
+  if (validPages.some((page) => page === newPage)) {
+    console.log("valid page");
+  } else {
+    console.log("invlid page");
+  }
+}
