@@ -22,16 +22,18 @@ function sortClick(evt) {
 goBtnElement.addEventListener("click", goBtnFunction);
 
 async function goBtnFunction() {
-  console.log(idElement.value);
   let idData;
+  let pageData;
   if (idElement.value > 10 || idElement.value < 0) {
     window.alert("Enter ID Value between 1-10");
     return;
+  } else if (pageElement.value < 1) {
+    window.alert("Enter Page No. more than 1");
+    return;
   }
   idData = idElement.value;
-
+  pageData = pageElement.value;
   const idDataCheck = idData && `id=${idData}`; // this is shorter version of ternary condition
-  const pageData = pageElement.value;
   const pageDataCheck = pageData && `&_page=${pageData}`;
   // function checkSort(sortValue) {
   //   if (sortValue) {
