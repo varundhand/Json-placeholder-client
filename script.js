@@ -2,20 +2,42 @@ const idElement = document.querySelector("#id"); // fetch it through GO button f
 const pageElement = document.querySelector("#page");
 const goBtnElement = document.querySelector("button");
 const responseElement = document.querySelector(".response-box");
+const responseFormElement = document.querySelector(".response-form");
 
 // variables to be used in endpoint
 let resource = "users";
 let id;
 let page;
 let sort = "";
-// const sort = sort && `&_order=${sort}`;
+
+// for rendering checking resource type in order to render form
+const resourceElementKeys = {
+  users: [
+    "id",
+    "name",
+    "username",
+    "email",
+    "address",
+    "phone",
+    "website",
+    "company",
+  ],
+  posts: ["userId", "id", "title", "body"],
+  albums: ["userId", "id", "title"],
+  photos: ["albumid", "id", "title", "url", "thumbnailUrl"],
+  todos: ["userId", "id", "title", "completed"],
+  comments: ["postId", "id", "name", "email", "body"],
+};
+// const { users, posts, albumbs, photos, todos, comments } = resourceElementKeys;
 
 function resourceClick(evt) {
   resource = evt.target.value;
+  renderForm(resourceElementKeys[`${resource}`]);
 }
 
 function sortClick(evt) {
   const sortValue = evt.target.value;
+
   console.log(sortValue);
   sort = sortValue ? `&_order=${sortValue}` : "";
 }
@@ -44,20 +66,14 @@ async function goBtnFunction() {
   );
   const data = await finalCall.json();
   const stringifiedData = JSON.stringify(data, null, 2);
-  console.log({ stringifiedData });
-
-  // data.forEach((singleObj) => {
-  //   for (const key2 in singleObj) {
-  //     if (singleObj.hasOwnProperty(key2)) {
-  //       console.log(`${key2} : ${singleObj[key2]}`);
-  //     }
-  //   }
-  // });
+  // console.log({ stringifiedData });
+  // console.log(data);
   showResponse(stringifiedData);
+  // renderForm(data);
 }
 
 function showResponse(object) {
-  console.log(responseElement);
+  // console.log(responseElement);
   responseElement.value = object;
 }
 
@@ -79,4 +95,48 @@ function onPageChange(e) {
   } else {
     console.log("invlid page");
   }
+}
+
+// function renderForm(data) { // data is the resource recieved on clicking
+//   data[0].forEach((singleObj) => {
+//     for (const key in singleObj) {
+//       if (singleObj.hasOwnProperty(key)) {
+//         console.log(`${key} : ${typeof singleObj[key]}`);
+//       }
+//     }
+//   });
+// }
+
+function renderForm(data) {
+  console.log(data);
+  // data is the array of specific resource's keys
+  data.forEach((element) => {
+    if (
+      element === "id" ||
+      element === "phone" ||
+      element === "userId" ||
+      element === "albumId" ||
+      element === "postId"
+    ) {
+      responseFormElement.innerHTML = ` <div class="input-group">
+      <span class="input-group-text">${element}</span>
+      <input type="number" class="form-control">
+    </div>`;
+    } else if (element === "email") {
+      responseFormElement.innerHTML = ` <div class="input-group">
+      <span class="input-group-text">${element}</span>
+      <input type="email" class="form-control">
+    </div>`;
+    } else if (element === "body") {
+      responseFormElement.innerHTML = `<div class="input-group h-25">
+      <span class="input-group-text">${element}</span>
+      <textarea class="form-control " ></textarea>
+    </div>`;
+    } else {
+      responseFormElement.innerHTML = ` <div class="input-group">
+      <span class="input-group-text">${element}</span>
+      <input type="text" class="form-control">
+    </div>`;
+    }
+  });
 }
