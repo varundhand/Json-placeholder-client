@@ -4,49 +4,77 @@ const goBtnresource = document.querySelector("button");
 const responseresource = document.querySelector(".response-box");
 const responseFormresource = document.querySelector(".response-form");
 
+const wrapperElementParent = document.createElement("div");
+responseFormresource.append(wrapperElementParent);
+
 // variables to be used in endpoint
 let resource = "users";
 let id;
 let page;
 let sort = "";
+let method;
 
 // for rendering checking resource type in order to render form
 const resourceresourceKeys = {
   users: [
-    { key: "id", element: "input", type: "" },
-    { key: "name", element: "input", type: "" },
-    { key: "username", element: "input", type: "" },
-    { key: "email", element: "input", type: "" },
-    { key: "address", element: "input", type: "" },
-    { key: "phone", element: "input", type: "" },
-    { key: "website", element: "input", type: "" },
-    { key: "company", element: "input", type: "" },
+    { key: "id", element: "input", type: "number" },
+    { key: "name", element: "input", type: "text" },
+    { key: "username", element: "input", type: "text" },
+    { key: "email", element: "input", type: "email" },
+    { key: "address", element: "input", type: "text" },
+    { key: "phone", element: "input", type: "number" },
+    { key: "website", element: "input", type: "email" },
+    { key: "company", element: "input", type: "text" },
   ],
   posts: [
-    { key: "userid", element: "input", type: "number" },
+    { key: "userId", element: "input", type: "number" },
     { key: "id", element: "input", type: "number" },
-    "id",
-    "title",
-    "body",
+    { key: "title", element: "input", type: "text" },
+    { key: "body", element: "input", type: "text" },
   ],
-  posts: ["userId", "id", "title", "body"],
-  albums: ["userId", "id", "title"],
-  photos: ["albumid", "id", "title", "url", "thumbnailUrl"],
-  todos: ["userId", "id", "title", "completed"],
-  comments: ["postId", "id", "name", "email", "body"],
+  albums: [
+    { key: "userId", element: "input", type: "number" },
+    { key: "id", element: "input", type: "number" },
+    { key: "title", element: "input", type: "text" },
+  ],
+  photos: [
+    { key: "albumId", element: "input", type: "number" },
+    { key: "id", element: "input", type: "number" },
+    { key: "title", element: "input", type: "text" },
+    { key: "url", element: "input", type: "text" },
+    { key: "thumbnailUrl", element: "input", type: "text" },
+  ],
+  todos: [
+    { key: "userId", element: "input", type: "number" },
+    { key: "id", element: "input", type: "number" },
+    { key: "title", element: "input", type: "text" },
+    { key: "completed", element: "input", type: "checkbox" },
+  ],
+  comments: [
+    { key: "postId", element: "input", type: "number" },
+    { key: "id", element: "input", type: "number" },
+    { key: "name", element: "input", type: "text" },
+    { key: "email", element: "input", type: "text" },
+    { key: "body", element: "input", type: "text" },
+  ],
 };
-// const { users, posts, albumbs, photos, todos, comments } = resourceresourceKeys;
+const { users, posts, albumbs, photos, todos, comments } = resourceresourceKeys;
 
 function resourceClick(evt) {
   resource = evt.target.value;
+  CleanUp();
   renderForm(resourceresourceKeys[resource]);
 }
 
 function sortClick(evt) {
   const sortValue = evt.target.value;
-
   console.log(sortValue);
   sort = sortValue ? `&_order=${sortValue}` : "";
+}
+
+function handleMethodChange(event) {
+  method = event.target.value;
+  console.log(method);
 }
 
 goBtnresource.addEventListener("click", goBtnFunction);
@@ -116,49 +144,36 @@ function onPageChange(e) {
 
 function renderForm(data) {
   console.log(data);
-  // data is the array of specific resource's keys
-  data.forEach((resource) => {
-    console.log(resource);
+  // data is the object of specific resource's keys, element and type
+  data.forEach((element) => {
+    const wrapperElement = document.createElement("div");
+    wrapperElement.className = "input-group p-2";
 
-    /**
-     * {
-     *  key: 'id',
-     *  element: 'input',
-     *  type: 'text',
-     * }
-     */
-    // createElement(element, type)
+    const spanElement = document.createElement("span");
+    spanElement.classList.add("input-group-text");
+    spanElement.innerHTML = element["key"];
 
-    if (
-      resource === "id" ||
-      resource === "phone" ||
-      resource === "userId" ||
-      resource === "albumId" ||
-      resource === "postId"
-    ) {
-      console.log("Runs this", responseFormresource.innerHTML);
+    const inputElement = document.createElement("input");
+    inputElement.classList.add("form-control");
+    inputElement.type = element["type"];
 
-      // append to form tag
-
-      responseFormresource.innerHTML = ` <div class="input-group">
-      <span class="input-group-text">${resource}</span>
-      <input type="number" class="form-control">
-    </div>`;
-    } else if (resource === "email") {
-      responseFormresource.innerHTML = ` <div class="input-group">
-      <span class="input-group-text">${resource}</span>
-      <input type="email" class="form-control">
-    </div>`;
-    } else if (resource === "body") {
-      responseFormresource.innerHTML = `<div class="input-group h-25">
-      <span class="input-group-text">${resource}</span>
-      <textarea class="form-control " ></textarea>
-    </div>`;
-    } else {
-      responseFormresource.innerHTML = ` <div class="input-group">
-      <span class="input-group-text">${resource}</span>
-      <input type="text" class="form-control">
-    </div>`;
-    }
+    wrapperElement.append(spanElement, inputElement);
+    wrapperElementParent.append(wrapperElement); // made a global variable in order to execute cleanup function
   });
+
+  /**
+   * {
+   *  key: 'id',
+   *  element: 'input',
+   *  type: 'text',
+   * }
+   */
+  // createElement(element, type)
+}
+
+function CleanUp() {
+  console.log(wrapperElementParent);
+  wrapperElementParent.innerHTML = "";
+  console.log("CleanUp is running");
+  // responseFormresource.innerHTML = "";
 }

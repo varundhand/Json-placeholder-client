@@ -19,6 +19,17 @@
   </head>
   <body>
     <form class="query-params bg-body p-5">
+
+      <div class="resources fw-bold">
+        <label for="">Method:</label>
+        <select name="resource " class="sort form-select" onchange="handleMethodChange(event)">
+          <!--resources-->
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+      </div>
+
       <div class="resources fw-bold">
         <label for="">Resource:</label>
         <select
@@ -64,9 +75,9 @@
       <div class="box-1 p-5 border-end w-100 overflow-auto">
         <form action="" class="response-form">
           
-          <!-- <div class="input-group">
+          <!-- <div class="input-group ">
             <span class="input-group-text">First and last name</span>
-            <input type="text" aria-label="First name" class="form-control">
+            <input type="" aria-label="First name" class="form-control">
           </div> -->
           <!-- <div class="input-group h-25">
             <span class="input-group-text">With textarea</span>
