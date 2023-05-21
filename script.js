@@ -79,7 +79,8 @@ function handleMethodChange(event) {
 
 goBtnresource.addEventListener("click", goBtnFunction);
 
-async function goBtnFunction() {
+async function goBtnFunction(e) {
+  e.preventDefault();
   let idData;
   let pageData;
   // console.log(pageresource.value);
